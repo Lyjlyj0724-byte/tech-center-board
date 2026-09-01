@@ -1,0 +1,122 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    /* 浅色主题 —— 暖纸柔墨（warm paper & soft ink） */
+    --background: 40 18% 96%;         /* 暖纸 #f6f5f2 */
+    --foreground: 0 0% 10%;           /* 柔黑 #1a1a1a */
+    --card: 0 0% 100%;
+    --card-foreground: 0 0% 10%;
+    --popover: 0 0% 100%;
+    --popover-foreground: 0 0% 10%;
+    --primary: 0 0% 10%;              /* 柔黑 —— 导航/按钮/强调 */
+    --primary-foreground: 0 0% 100%;
+    --secondary: 40 16% 94%;
+    --secondary-foreground: 0 0% 10%;
+    --muted: 40 16% 94%;
+    --muted-foreground: 40 6% 44%;    /* 暖灰次要文字 */
+    --accent: 40 16% 93%;
+    --accent-foreground: 0 0% 10%;
+    --destructive: 0 72% 51%;
+    --destructive-foreground: 0 0% 100%;
+    --border: 40 14% 89%;             /* 暖调发丝线 */
+    --input: 40 12% 83%;
+    --ring: 0 0% 10%;
+    --radius: 0.5rem;
+
+    /* 数据语义色（仅用于地图/地区数据） */
+    --ok: 160 70% 32%;
+    --warn: 38 95% 42%;
+    --bad: 0 72% 50%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+  html {
+    color-scheme: light;
+  }
+  body {
+    @apply bg-background text-foreground;
+    font-family: "Inter", "PingFang SC", "Noto Sans SC", "Source Han Sans SC", "Microsoft YaHei", system-ui, sans-serif;
+    font-size: 14px;
+    -webkit-font-smoothing: antialiased;
+  }
+  .mono {
+    font-family: "JetBrains Mono", "Cascadia Mono", Consolas, ui-monospace, "Microsoft YaHei", monospace;
+    font-variant-numeric: tabular-nums;
+  }
+}
+
+@layer components {
+  /* 面板：白底 + 发丝边框 + 统一圆角，无阴影 */
+  .panel {
+    @apply bg-card border border-border rounded-lg overflow-hidden;
+  }
+  /* 小节标签：微字距提升精致感 */
+  .label {
+    @apply text-[11px] font-medium tracking-[0.04em] text-muted-foreground;
+  }
+  /* 中文衬线（公文/报表标题） */
+  .serif-cn {
+    font-family: "Songti SC", "STSong", "SimSun", "Noto Serif SC", "Source Han Serif SC", serif;
+  }
+  /* 数据大数字：紧字距 + 表格数字 */
+  .bignum {
+    @apply mono font-semibold tracking-[-0.02em] text-foreground;
+  }
+  /* 状态灯：纯色圆点 */
+  .led {
+    @apply inline-block h-2 w-2 rounded-full;
+  }
+  .hairline-b {
+    @apply border-b border-border;
+  }
+  .th-cell {
+    @apply label px-3 py-2 text-left font-normal;
+  }
+  .td-cell {
+    @apply px-3 py-2 text-sm;
+  }
+}
+
+/* 细滚动条 */
+::-webkit-scrollbar { width: 6px; height: 6px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb { background: hsl(var(--border)); border-radius: 3px; }
+::-webkit-scrollbar-thumb:hover { background: hsl(var(--muted-foreground) / 0.5); }
+
+/* ── 打印：输出纸质报告时转为白纸黑字 ── */
+@media print {
+  html { color-scheme: light; }
+  body {
+    background: #fff !important;
+    color: #000 !important;
+    font-size: 12px;
+  }
+  .no-print { display: none !important; }
+  .print-page {
+    position: absolute !important;
+    inset: 0 !important;
+    width: 100% !important;
+    padding: 0 !important;
+    margin: 0 !important;
+    background: #fff !important;
+    color: #000 !important;
+  }
+  .print-page * {
+    color: #000 !important;
+    background: transparent !important;
+    border-color: #999 !important;
+    box-shadow: none !important;
+    text-shadow: none !important;
+  }
+  @page {
+    size: A4;
+    margin: 14mm;
+  }
+}
