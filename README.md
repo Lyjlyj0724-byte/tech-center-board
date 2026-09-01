@@ -1,5 +1,7 @@
 # 技术中心设备看板
 
+[![CI](https://github.com/Lyjlyj0724-byte/tech-center-board/actions/workflows/ci.yml/badge.svg)](https://github.com/Lyjlyj0724-byte/tech-center-board/actions/workflows/ci.yml)
+
 本地部署、局域网内多人共享编辑的设备生产看板系统。
 
 ## 功能

@@ -21,6 +21,8 @@ export function useBoard(pollMs = 8000) {
   }, [])
 
   useEffect(() => {
+    // 挂载时立即拉取一次是数据加载的标准模式，豁免 set-state-in-effect
+    // eslint-disable-next-line react-hooks/set-state-in-effect
     refresh()
     timer.current = window.setInterval(refresh, pollMs)
     return () => { if (timer.current) window.clearInterval(timer.current) }
